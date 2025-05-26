@@ -4,11 +4,13 @@ public class Professor {
 	
 	private String cpf;
 	private String areaConhecimento;
-	private int pontuacao;
+	private double pontuacao;
 	
-	@Override
-	public String toString() {
-		return "Professor [cpf=" + cpf + ", areaConhecimento=" + areaConhecimento + ", pontuacao=" + pontuacao + "]";
+	public Professor(String cpf, String areaConhecimento, double pontuacao) {
+		super();
+		this.cpf = cpf;
+		this.areaConhecimento = areaConhecimento;
+		this.pontuacao = pontuacao;
 	}
 	
 	public String getCpf() {
@@ -23,7 +25,7 @@ public class Professor {
 	public void setAreaConhecimento(String areaConhecimento) {
 		this.areaConhecimento = areaConhecimento;
 	}
-	public int getPontuacao() {
+	public double getPontuacao() {
 		return pontuacao;
 	}
 	public void setPontuacao(int pontuacao) {

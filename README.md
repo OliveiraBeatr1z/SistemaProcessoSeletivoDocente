@@ -5,7 +5,7 @@
 Este projeto tem como objetivo simular o processo de seleção de docentes para uma instituição de ensino. 
 O sistema permite o gerenciamento de professores e inscrições, utilizando uma estrutura de dados 
 personalizada baseada em listas encadeadas simples. O projeto já possui um arquivo em formato csv com os cursos 
-e disciplinas disponéveis.
+e disciplinas disponéveis, esses não serão criados ou atualizados.
 
 ---
 

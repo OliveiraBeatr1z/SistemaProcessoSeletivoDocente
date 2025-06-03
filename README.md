@@ -31,6 +31,12 @@ O projeto segue o padrão de arquitetura **DDD (Domain-Driven Design)**, dividid
 - **Repository**: Responsável pelo armazenamento e recuperação de dados usando listas encadeadas personalizadas;
 - **Model**: Define as entidades do sistema, como `Professor`, `Disciplina`, `Curso` e `Inscricao`.
 
+### 🧹 Por que isso é melhor?
+- O Controller só lida com a UI.
+- A Service lida com regras de negócio e pode ser testada separadamente.
+- O Repository lida com persistência.
+- O Model é só o dado e suas regras básicas.
+
 ---
 
 ## 💻 Tecnologias

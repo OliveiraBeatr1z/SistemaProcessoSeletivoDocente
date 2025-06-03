@@ -5,6 +5,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.CursoController;
+import controller.DisciplinaController;
+import controller.InscricaoController;
+import controller.ProfessorController;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -21,17 +27,19 @@ public class Tela extends JFrame {
 	private JPanel contentPane;
 	private JTextField tfNomeCurso;
 	private JTextField tfAreaConhecimentoCurso;
-	private JTextField txtInsiraOCodigo;
+	private JTextField tfCodDisciplina;
 	private JTextField tfNomeDisciplina;
 	private JTextField tfDiaSemanaDisciplina;
 	private JTextField tfHoraAulaDisciplina;
 	private JTextField tfCpfProfessor;
 	private JTextField tfAreaConhecimentoProfessor;
 	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField tfCodProcesso;
+	private JTextField tfCpfCandidato;
+	private JTextField tfDisciplinaInscricao;
+	private JTextField tfAreaConhecimentoInscricao;
+	private JTextField tfCodigoCurso;
+	private JTextField tfNomeProfessor;
 
 	/**
 	 * Launch the application.
@@ -66,51 +74,6 @@ public class Tela extends JFrame {
 		tabbedPane.setBounds(0, 0, 624, 441);
 		contentPane.add(tabbedPane);
 		
-		JPanel TabCurso = new JPanel();
-		TabCurso.setToolTipText("Cursos disponíveis");
-		tabbedPane.addTab("Cursos", null, TabCurso, null);
-		TabCurso.setLayout(null);
-		
-		JLabel lblNomeCurso = new JLabel("Nome");
-		lblNomeCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNomeCurso.setBounds(28, 28, 51, 27);
-		TabCurso.add(lblNomeCurso);
-		
-		JLabel lblCursoAreaConhecimento = new JLabel("Area de Conhecimento");
-		lblCursoAreaConhecimento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCursoAreaConhecimento.setBounds(28, 75, 145, 17);
-		TabCurso.add(lblCursoAreaConhecimento);
-		
-		tfNomeCurso = new JTextField();
-		tfNomeCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tfNomeCurso.setBounds(180, 73, 217, 20);
-		TabCurso.add(tfNomeCurso);
-		tfNomeCurso.setColumns(10);
-		
-		tfAreaConhecimentoCurso = new JTextField();
-		tfAreaConhecimentoCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tfAreaConhecimentoCurso.setBounds(180, 31, 217, 20);
-		TabCurso.add(tfAreaConhecimentoCurso);
-		tfAreaConhecimentoCurso.setColumns(10);
-		
-		JButton btnCursoNomeBuscar = new JButton("Buscar");
-		btnCursoNomeBuscar.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnCursoNomeBuscar.setBounds(429, 72, 89, 23);
-		TabCurso.add(btnCursoNomeBuscar);
-		
-		JButton btnBuscarAreaConhecimento = new JButton("Bucar");
-		btnBuscarAreaConhecimento.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnBuscarAreaConhecimento.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnBuscarAreaConhecimento.setBounds(429, 31, 89, 23);
-		TabCurso.add(btnBuscarAreaConhecimento);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(10, 127, 599, 199);
-		TabCurso.add(textArea);
-		
 		JPanel TabDisciplina = new JPanel();
 		tabbedPane.addTab("Disciplinas", null, TabDisciplina, "Consultar disciplinas");
 		TabDisciplina.setLayout(null);
@@ -135,10 +98,10 @@ public class Tela extends JFrame {
 		lblHoraAulaDisciplina.setBounds(28, 155, 107, 23);
 		TabDisciplina.add(lblHoraAulaDisciplina);
 		
-		txtInsiraOCodigo = new JTextField();
-		txtInsiraOCodigo.setBounds(166, 39, 220, 20);
-		TabDisciplina.add(txtInsiraOCodigo);
-		txtInsiraOCodigo.setColumns(10);
+		tfCodDisciplina = new JTextField();
+		tfCodDisciplina.setBounds(166, 39, 220, 20);
+		TabDisciplina.add(tfCodDisciplina);
+		tfCodDisciplina.setColumns(10);
 		
 		tfNomeDisciplina = new JTextField();
 		tfNomeDisciplina.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -158,70 +121,67 @@ public class Tela extends JFrame {
 		TabDisciplina.add(tfHoraAulaDisciplina);
 		tfHoraAulaDisciplina.setColumns(10);
 		
-		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBackground(new Color(128, 128, 128));
-		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnBuscar.setBounds(28, 199, 166, 36);
-		TabDisciplina.add(btnBuscar);
+		JButton btnBuscarDisciplina = new JButton("Buscar");
+		btnBuscarDisciplina.setBackground(new Color(128, 128, 128));
+		btnBuscarDisciplina.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnBuscarDisciplina.setBounds(28, 199, 166, 36);
+		TabDisciplina.add(btnBuscarDisciplina);
 		
-		JTextArea taDisciplinas = new JTextArea();
-		taDisciplinas.setBounds(10, 246, 599, 156);
-		TabDisciplina.add(taDisciplinas);
+		JTextArea taDisciplinasLista = new JTextArea();
+		taDisciplinasLista.setBounds(10, 246, 599, 156);
+		TabDisciplina.add(taDisciplinasLista);
 		
-		JPanel TabProfessor = new JPanel();
-		TabProfessor.setToolTipText("Cadastrar professores");
-		tabbedPane.addTab("Professores", null, TabProfessor, null);
-		TabProfessor.setLayout(null);
+		JPanel TabCurso = new JPanel();
+		TabCurso.setToolTipText("Cursos disponíveis");
+		tabbedPane.addTab("Cursos", null, TabCurso, null);
+		TabCurso.setLayout(null);
 		
-		JLabel lblCpfProfessor = new JLabel("CPF");
-		lblCpfProfessor.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblCpfProfessor.setBounds(26, 42, 56, 19);
-		TabProfessor.add(lblCpfProfessor);
+		JLabel lblNomeCurso = new JLabel("Nome");
+		lblNomeCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNomeCurso.setBounds(28, 49, 51, 27);
+		TabCurso.add(lblNomeCurso);
 		
-		tfCpfProfessor = new JTextField();
-		tfCpfProfessor.setToolTipText("cpf do professor");
-		tfCpfProfessor.setBounds(182, 42, 140, 20);
-		TabProfessor.add(tfCpfProfessor);
-		tfCpfProfessor.setColumns(10);
+		JLabel lblCursoAreaConhecimento = new JLabel("Area de Conhecimento");
+		lblCursoAreaConhecimento.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCursoAreaConhecimento.setBounds(28, 75, 145, 17);
+		TabCurso.add(lblCursoAreaConhecimento);
 		
-		JLabel lblAreaConhecimentoProfessor = new JLabel("Area de Conhecimento");
-		lblAreaConhecimentoProfessor.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblAreaConhecimentoProfessor.setBounds(28, 72, 154, 19);
-		TabProfessor.add(lblAreaConhecimentoProfessor);
+		tfNomeCurso = new JTextField();
+		tfNomeCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfNomeCurso.setBounds(177, 52, 217, 20);
+		TabCurso.add(tfNomeCurso);
+		tfNomeCurso.setColumns(10);
 		
-		tfAreaConhecimentoProfessor = new JTextField();
-		tfAreaConhecimentoProfessor.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		tfAreaConhecimentoProfessor.setBounds(182, 73, 174, 20);
-		TabProfessor.add(tfAreaConhecimentoProfessor);
-		tfAreaConhecimentoProfessor.setColumns(10);
+		tfAreaConhecimentoCurso = new JTextField();
+		tfAreaConhecimentoCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfAreaConhecimentoCurso.setBounds(177, 76, 171, 20);
+		TabCurso.add(tfAreaConhecimentoCurso);
+		tfAreaConhecimentoCurso.setColumns(10);
 		
-		JLabel lblpontuacaoProfessor = new JLabel("Pontuação");
-		lblpontuacaoProfessor.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblpontuacaoProfessor.setBounds(26, 111, 147, 19);
-		TabProfessor.add(lblpontuacaoProfessor);
-		
-		textField = new JTextField();
-		textField.setBounds(182, 112, 174, 20);
-		TabProfessor.add(textField);
-		textField.setColumns(10);
-		
-		JButton btnBuscarProfessor = new JButton("Buscar");
-		btnBuscarProfessor.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnBuscarProfessor.setBounds(32, 165, 89, 23);
-		TabProfessor.add(btnBuscarProfessor);
-		
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.addActionListener(new ActionListener() {
+		JButton btnBuscarCurso = new JButton("Bucar");
+		btnBuscarCurso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnCadastrar.setBounds(182, 164, 121, 25);
-		TabProfessor.add(btnCadastrar);
+		btnBuscarCurso.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnBuscarCurso.setBounds(409, 73, 89, 23);
+		TabCurso.add(btnBuscarCurso);
 		
-		JTextArea taProfessores = new JTextArea();
-		taProfessores.setBounds(10, 209, 599, 193);
-		TabProfessor.add(taProfessores);
+		JTextArea taCursoLista = new JTextArea();
+		taCursoLista.setBounds(10, 127, 599, 199);
+		TabCurso.add(taCursoLista);
+		
+		
+		
+		JLabel lblCodCurso = new JLabel("Codigo do curso");
+		lblCodCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCodCurso.setBounds(28, 27, 131, 17);
+		TabCurso.add(lblCodCurso);
+		
+		tfCodigoCurso = new JTextField();
+		tfCodigoCurso.setBounds(177, 27, 145, 20);
+		TabCurso.add(tfCodigoCurso);
+		tfCodigoCurso.setColumns(10);
 		
 		JPanel TabInscricao = new JPanel();
 		tabbedPane.addTab("Inscrição", null, TabInscricao, null);
@@ -242,47 +202,129 @@ public class Tela extends JFrame {
 		lblDiscilinaInscricao.setBounds(28, 126, 83, 17);
 		TabInscricao.add(lblDiscilinaInscricao);
 		
-		JLabel lblAreaAplicacaoInscricao = new JLabel("Area de Aplicação");
+		JLabel lblAreaAplicacaoInscricao = new JLabel("Area de Conhecimento");
 		lblAreaAplicacaoInscricao.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblAreaAplicacaoInscricao.setBounds(27, 167, 113, 17);
+		lblAreaAplicacaoInscricao.setBounds(27, 167, 148, 17);
 		TabInscricao.add(lblAreaAplicacaoInscricao);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(150, 44, 163, 20);
-		TabInscricao.add(textField_1);
-		textField_1.setColumns(10);
+		tfCodProcesso = new JTextField();
+		tfCodProcesso.setBounds(185, 44, 163, 20);
+		TabInscricao.add(tfCodProcesso);
+		tfCodProcesso.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(150, 84, 163, 20);
-		TabInscricao.add(textField_2);
-		textField_2.setColumns(10);
+		tfCpfCandidato = new JTextField();
+		tfCpfCandidato.setBounds(185, 84, 163, 20);
+		TabInscricao.add(tfCpfCandidato);
+		tfCpfCandidato.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(150, 126, 163, 20);
-		TabInscricao.add(textField_3);
-		textField_3.setColumns(10);
+		tfDisciplinaInscricao = new JTextField();
+		tfDisciplinaInscricao.setBounds(185, 126, 163, 20);
+		TabInscricao.add(tfDisciplinaInscricao);
+		tfDisciplinaInscricao.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(150, 167, 163, 20);
-		TabInscricao.add(textField_4);
-		textField_4.setColumns(10);
+		tfAreaConhecimentoInscricao = new JTextField();
+		tfAreaConhecimentoInscricao.setBounds(185, 167, 163, 20);
+		TabInscricao.add(tfAreaConhecimentoInscricao);
+		tfAreaConhecimentoInscricao.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Buscar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnBuscarInscricao = new JButton("Buscar");
+		btnBuscarInscricao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton.setBounds(28, 206, 99, 27);
-		TabInscricao.add(btnNewButton);
+		btnBuscarInscricao.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnBuscarInscricao.setBounds(28, 206, 99, 27);
+		TabInscricao.add(btnBuscarInscricao);
 		
-		JButton btnNewButton_1 = new JButton("Cadastrar");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton_1.setBounds(146, 207, 113, 26);
-		TabInscricao.add(btnNewButton_1);
+		JButton btnCadastrarInscricao = new JButton("Cadastrar");
+		btnCadastrarInscricao.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnCadastrarInscricao.setBounds(146, 207, 113, 26);
+		TabInscricao.add(btnCadastrarInscricao);
 		
-		JTextArea taInscricoes = new JTextArea();
-		taInscricoes.setBounds(10, 254, 599, 128);
-		TabInscricao.add(taInscricoes);
+		JTextArea taInscricoesLista = new JTextArea();
+		taInscricoesLista.setBounds(10, 254, 599, 128);
+		TabInscricao.add(taInscricoesLista);
+		
+		JPanel TabProfessor = new JPanel();
+		TabProfessor.setToolTipText("Cadastrar professores");
+		tabbedPane.addTab("Professores", null, TabProfessor, null);
+		TabProfessor.setLayout(null);
+		
+		JLabel lblCpfProfessor = new JLabel("CPF");
+		lblCpfProfessor.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCpfProfessor.setBounds(29, 26, 56, 19);
+		TabProfessor.add(lblCpfProfessor);
+		
+		tfCpfProfessor = new JTextField();
+		tfCpfProfessor.setToolTipText("cpf do professor");
+		tfCpfProfessor.setBounds(182, 26, 140, 20);
+		TabProfessor.add(tfCpfProfessor);
+		tfCpfProfessor.setColumns(10);
+		
+		JLabel lblAreaConhecimentoProfessor = new JLabel("Area de Conhecimento");
+		lblAreaConhecimentoProfessor.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblAreaConhecimentoProfessor.setBounds(29, 81, 154, 19);
+		TabProfessor.add(lblAreaConhecimentoProfessor);
+		
+		tfAreaConhecimentoProfessor = new JTextField();
+		tfAreaConhecimentoProfessor.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		tfAreaConhecimentoProfessor.setBounds(182, 81, 174, 20);
+		TabProfessor.add(tfAreaConhecimentoProfessor);
+		tfAreaConhecimentoProfessor.setColumns(10);
+		
+		JLabel lblpontuacaoProfessor = new JLabel("Pontuação");
+		lblpontuacaoProfessor.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblpontuacaoProfessor.setBounds(26, 111, 147, 19);
+		TabProfessor.add(lblpontuacaoProfessor);
+		
+		textField = new JTextField();
+		textField.setBounds(182, 112, 174, 20);
+		TabProfessor.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnBuscarProfessor = new JButton("Buscar");
+		btnBuscarProfessor.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnBuscarProfessor.setBounds(32, 165, 89, 23);
+		TabProfessor.add(btnBuscarProfessor);
+		
+		JButton btnCadastrarProfessor = new JButton("Cadastrar");
+		btnCadastrarProfessor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCadastrarProfessor.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnCadastrarProfessor.setBounds(182, 164, 121, 25);
+		TabProfessor.add(btnCadastrarProfessor);
+		
+		JTextArea taProfessoresLista = new JTextArea();
+		taProfessoresLista.setBounds(10, 209, 599, 193);
+		TabProfessor.add(taProfessoresLista);
+		
+		JLabel lblNomeProfessor = new JLabel("Nome");
+		lblNomeProfessor.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNomeProfessor.setBounds(29, 56, 56, 14);
+		TabProfessor.add(lblNomeProfessor);
+		
+		tfNomeProfessor = new JTextField();
+		tfNomeProfessor.setBounds(182, 55, 140, 20);
+		TabProfessor.add(tfNomeProfessor);
+		tfNomeProfessor.setColumns(10);
+		
+		
+		CursoController cCont = new CursoController(tfCodigoCurso, tfNomeCurso, tfAreaConhecimentoCurso, taCursoLista);
+		btnBuscarCurso.addActionListener(cCont);
+		
+		// quando clicar no botao vai chamar essa classe. Por essa classe ter o actionListener vai chamar o action  performance. 
+		ProfessorController pCont = new ProfessorController(tfCpfProfessor, tfNomeProfessor, tfAreaConhecimentoProfessor, taProfessoresLista );
+		btnCadastrarProfessor.addActionListener(pCont);
+		btnBuscarProfessor.addActionListener(pCont);
+		
+		InscricaoController iCont = new InscricaoController(tfCodProcesso,  tfCpfProfessor,  tfDisciplinaInscricao, taInscricoesLista);
+		btnCadastrarInscricao.addActionListener(iCont);
+		btnBuscarInscricao.addActionListener(iCont);
+		
+		DisciplinaController dCont = new DisciplinaController(tfCodDisciplina, tfNomeDisciplina, tfDiaSemanaDisciplina, tfHoraAulaDisciplina);
+		btnBuscarDisciplina.addActionListener(dCont);
+		
 	}
 }

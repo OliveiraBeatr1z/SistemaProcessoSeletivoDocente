@@ -1,7 +1,7 @@
 package model;
 
 public class Curso {
-	private long codCurso;
+	private String codCurso;
 	private String nomeCurso;
 	private String areaConhecimentoCurso;
 	
@@ -11,11 +11,11 @@ public class Curso {
 				+ areaConhecimentoCurso + "]";
 	}
 
-	public long getCodCurso() {
+	public String getCodCurso() {
 		return codCurso;
 	}
 
-	public void setCodCurso(long codCurso) {
+	public void setCodCurso(String codCurso) {
 		this.codCurso = codCurso;
 	}
 

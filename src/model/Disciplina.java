@@ -1,13 +1,11 @@
 package model;
 
-import java.time.LocalTime;
-
 public class Disciplina {
-	private long codDisciplina;
+	private String codDisciplina;
 	private String nomeDisciplina;
 	private String diaSemana;
-	private LocalTime horarioInicio;
-	private int horasDiarias;
+	private String horarioInicio;
+	private String horasDiarias;
 	
 	@Override
 	public String toString() {
@@ -15,11 +13,11 @@ public class Disciplina {
 				+ diaSemana + ", horarioInicio=" + horarioInicio + ", horasDiarias=" + horasDiarias + "]";
 	}
 
-	public long getCodDisciplina() {
+	public String getCodDisciplina() {
 		return codDisciplina;
 	}
 
-	public void setCodDisciplina(long codDisciplina) {
+	public void setCodDisciplina(String codDisciplina) {
 		this.codDisciplina = codDisciplina;
 	}
 
@@ -39,21 +37,22 @@ public class Disciplina {
 		this.diaSemana = diaSemana;
 	}
 
-	public LocalTime getHorarioInicio() {
+	public String getHorarioInicio() {
 		return horarioInicio;
 	}
 
-	public void setHorarioInicio(LocalTime horarioInicio) {
+	public void setHorarioInicio(String horarioInicio) {
 		this.horarioInicio = horarioInicio;
 	}
 
-	public int getHorasDiarias() {
+	public String getHorasDiarias() {
 		return horasDiarias;
 	}
 
-	public void setHorasDiarias(int horasDiarias) {
+	public void setHorasDiarias(String horasDiarias) {
 		this.horasDiarias = horasDiarias;
 	}
+
 	
 	
 }

@@ -3,15 +3,9 @@ package model;
 public class Professor {
 	
 	private String cpf;
-	private String areaConhecimento;
-	private double pontuacao;
-	
-	public Professor(String cpf, String areaConhecimento, double pontuacao) {
-		super();
-		this.cpf = cpf;
-		this.areaConhecimento = areaConhecimento;
-		this.pontuacao = pontuacao;
-	}
+	private String nomeProfessor;
+	private String areaConhecimentoProfessor;
+	private String pontuacao;
 	
 	public String getCpf() {
 		return cpf;
@@ -19,18 +13,31 @@ public class Professor {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	public String getNome() {
+		return nomeProfessor;
+	}
+	public void setNome(String nome) {
+		this.nomeProfessor = nome;
+	}
 	public String getAreaConhecimento() {
-		return areaConhecimento;
+		return areaConhecimentoProfessor;
 	}
 	public void setAreaConhecimento(String areaConhecimento) {
-		this.areaConhecimento = areaConhecimento;
+		this.areaConhecimentoProfessor = areaConhecimento;
 	}
-	public double getPontuacao() {
+	public String getPontuacao() {
 		return pontuacao;
 	}
-	public void setPontuacao(int pontuacao) {
+	public void setPontuacao(String pontuacao) {
 		this.pontuacao = pontuacao;
 	}
+	
+	@Override
+	public String toString() {
+		return cpf + ";" + nomeProfessor + ";" + areaConhecimentoProfessor;
+	}
+	
+	
 	
 	
 

@@ -1,47 +1,54 @@
 package repository;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
-import br.com.beatrizoliveiralistagenerica.Lista;
 import model.Professor;
 
 public class ProfessorRepository {
+	private final String path = System.getProperty("user.home") + File.separator + "Sistema PSD";
+	private final String  arquivo = "professor.csv";
 	
-	public Lista<Professor> listarProfessores() {
-        Lista <Professor> professores = new Lista<>();
+	public void salvar(Professor professor) throws IOException {
+		File dir = new File(path);
+		if(!dir.exists()) dir.mkdir();
+		
+		File arq = new File(path, arquivo);
+		boolean existe = arq.exists();
+		
+		try(FileWriter fw = new FileWriter(arq, existe);
+			PrintWriter pw = new PrintWriter(fw)){
+			pw.write(professor.getCpf() +" ; "+  professor.getNome() +" ; "+ professor.getAreaConhecimento() + "\r\n");
+		}
+	}
+	
+	public Professor buscaPorCpf(String cpf) throws IOException {
+		File arq = new File(path,arquivo);
+		
+		if(arq.exists() && arq.isFile()) {
+			try(BufferedReader br = new BufferedReader (new InputStreamReader (new FileInputStream(arq)))) {
+				String linha;
+				while ((linha = br.readLine()) != null) {
+					String[] dados = linha.split(";");
+					if(dados[0].equals(cpf)) {
+						Professor professor = new Professor();
+						professor.setCpf(dados[0]);
+						professor.setNome(dados[1]);
+						professor.setAreaConhecimento(dados[2]);
+						return professor;
+					}
+				}
+			}
+					
+		}
+		return null;
+	}
 
-        try (BufferedReader br = new BufferedReader(new FileReader("professores.csv"))) {
-            String linha;
-            while ((linha = br.readLine()) != null) {
-                String[] dados = linha.split(";");
-                String cpf = dados[0];
-                String area = dados[1];
-                double pontuacao = Double.parseDouble(dados[2]);
-
-                Professor p = new Professor(cpf, area, pontuacao);
-                professores.adicionar(p); // ou o método equivalente da sua lista
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return professores;
-    }
-
-    public void salvarProfessor(Professor professor) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("professores.csv", true))) {
-            String linha = professor.getCpf() + ";" + professor.getAreaConhecimento() + ";" + professor.getPontuacao();
-            bw.write(linha);
-            bw.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
 
-}
+

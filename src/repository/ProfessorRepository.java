@@ -26,6 +26,7 @@ public class ProfessorRepository {
 			pw.write(professor.getCpf() +";"+  professor.getNome() +"; "+ professor.getAreaConhecimento() + "\r\n");
 		}
 	}
+	// teste
 	
 	public Professor buscaPorCpf(String cpf) throws IOException {
 		File arq = new File(path,arquivo);

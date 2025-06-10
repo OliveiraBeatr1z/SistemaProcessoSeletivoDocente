@@ -23,7 +23,7 @@ public class ProfessorRepository {
 		
 		try(FileWriter fw = new FileWriter(arq, existe);
 			PrintWriter pw = new PrintWriter(fw)){
-			pw.write(professor.getCpf() +" ; "+  professor.getNome() +" ; "+ professor.getAreaConhecimento() + "\r\n");
+			pw.write(professor.getCpf() +" ; "+  professor.getNomeProfessor() +" ; "+ professor.getAreaConhecimento() + "\r\n");
 		}
 	}
 	
@@ -38,7 +38,7 @@ public class ProfessorRepository {
 					if(dados[0].equals(cpf)) {
 						Professor professor = new Professor();
 						professor.setCpf(dados[0]);
-						professor.setNome(dados[1]);
+						professor.setNomeProfessor(dados[1]);
 						professor.setAreaConhecimento(dados[2]);
 						return professor;
 					}

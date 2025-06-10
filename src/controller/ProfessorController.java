@@ -44,7 +44,7 @@ public class ProfessorController implements ActionListener {
 	private void cadastrar() throws IOException {
 		Professor professor = new Professor();
 		professor.setCpf(tfCpf.getText());
-		professor.setNome(tfNomeProfessor.getText());
+		professor.setNomeProfessor(tfNomeProfessor.getText());
 		
 		ProfessorService professorService = new ProfessorService();
 		professorService.cadastrarProfessor(professor);
@@ -62,8 +62,8 @@ public class ProfessorController implements ActionListener {
 		ProfessorService service = new ProfessorService(); 
 		professor = service.buscarPorCpf(cpf);  
 
-		if(professor.getNome() != null) {
-			taProfessoresLista.setText("CPF: " + professor.getCpf() + " - Nome: " + professor.getNome() + " - Area de conhecimento: " + professor.getAreaConhecimento());
+		if(professor.getNomeProfessor() != null) {
+			taProfessoresLista.setText("CPF: " + professor.getCpf() + " - Nome: " + professor.getNomeProfessor() + " - Area de conhecimento: " + professor.getAreaConhecimento());
 		} else {
 			taProfessoresLista.setText("Professor não encontrado.");
 		}

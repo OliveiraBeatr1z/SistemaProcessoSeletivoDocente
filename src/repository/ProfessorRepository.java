@@ -23,7 +23,7 @@ public class ProfessorRepository {
 		
 		try(FileWriter fw = new FileWriter(arq, existe);
 			PrintWriter pw = new PrintWriter(fw)){
-			pw.write(professor.getCpf() +" ; "+  professor.getNome() +" ; "+ professor.getAreaConhecimento() + "\r\n");
+			pw.write(professor.getCpf() +";"+  professor.getNome() +"; "+ professor.getAreaConhecimento() + "\r\n");
 		}
 	}
 	

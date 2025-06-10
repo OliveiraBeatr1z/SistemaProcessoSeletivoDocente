@@ -4,11 +4,11 @@ public class Inscricao {
 	private String codProcesso;
     private String cpfProfessor;
     private String codigoDisciplina;
+    private String pontuacao;
     
 	@Override
 	public String toString() {
-		return "Inscricao [codProcesso=" + codProcesso + ", cpfProfessor=" + cpfProfessor + ", codigoDisciplina="
-				+ codigoDisciplina + "]";
+		return codProcesso + ";" + cpfProfessor + ";" + codigoDisciplina + ";" + pontuacao;
 		
 	}
 
@@ -37,6 +37,11 @@ public class Inscricao {
 	}
 	
 	
-	
+	public String getPontuacao() {
+		return pontuacao;
+	}
+	public void setPontuacao(String pontuacao) {
+		this.pontuacao = pontuacao;
+	}
     
 }

@@ -13,10 +13,10 @@ public class Professor {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public String getNome() {
+	public String getNomeProfessor() {
 		return nomeProfessor;
 	}
-	public void setNome(String nome) {
+	public void setNomeProfessor(String nome) {
 		this.nomeProfessor = nome;
 	}
 	public String getAreaConhecimento() {

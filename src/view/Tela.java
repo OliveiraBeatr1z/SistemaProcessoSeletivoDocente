@@ -36,7 +36,6 @@ public class Tela extends JFrame {
 	private JTextField tfCodProcesso;
 	private JTextField tfCpfCandidato;
 	private JTextField tfDisciplinaInscricao;
-	private JTextField tfAreaConhecimentoInscricao;
 	private JTextField tfCodigoCurso;
 	private JTextField tfNomeProfessor;
 	private JTextField tfPontuacao;
@@ -189,7 +188,7 @@ public class Tela extends JFrame {
 		
 		JLabel lblCodProcessoInscricao = new JLabel("Processo");
 		lblCodProcessoInscricao.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCodProcessoInscricao.setBounds(28, 22, 69, 17);
+		lblCodProcessoInscricao.setBounds(28, 33, 69, 17);
 		TabInscricao.add(lblCodProcessoInscricao);
 		
 		JLabel lblCpfInscricao = new JLabel("Cpf Candidato");
@@ -197,18 +196,13 @@ public class Tela extends JFrame {
 		lblCpfInscricao.setBounds(28, 61, 99, 17);
 		TabInscricao.add(lblCpfInscricao);
 		
-		JLabel lblDiscilinaInscricao = new JLabel("Disciplina");
+		JLabel lblDiscilinaInscricao = new JLabel("Codigo disciplina");
 		lblDiscilinaInscricao.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDiscilinaInscricao.setBounds(28, 98, 83, 17);
+		lblDiscilinaInscricao.setBounds(28, 98, 113, 17);
 		TabInscricao.add(lblDiscilinaInscricao);
 		
-		JLabel lblAreaAplicacaoInscricao = new JLabel("Area de Conhecimento");
-		lblAreaAplicacaoInscricao.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblAreaAplicacaoInscricao.setBounds(31, 136, 148, 17);
-		TabInscricao.add(lblAreaAplicacaoInscricao);
-		
 		tfCodProcesso = new JTextField();
-		tfCodProcesso.setBounds(185, 22, 163, 20);
+		tfCodProcesso.setBounds(185, 30, 163, 20);
 		TabInscricao.add(tfCodProcesso);
 		tfCodProcesso.setColumns(10);
 		
@@ -221,11 +215,6 @@ public class Tela extends JFrame {
 		tfDisciplinaInscricao.setBounds(185, 96, 163, 20);
 		TabInscricao.add(tfDisciplinaInscricao);
 		tfDisciplinaInscricao.setColumns(10);
-		
-		tfAreaConhecimentoInscricao = new JTextField();
-		tfAreaConhecimentoInscricao.setBounds(185, 136, 163, 20);
-		TabInscricao.add(tfAreaConhecimentoInscricao);
-		tfAreaConhecimentoInscricao.setColumns(10);
 		
 		JButton btnBuscarInscricao = new JButton("Buscar");
 		btnBuscarInscricao.addActionListener(new ActionListener() {
@@ -313,11 +302,11 @@ public class Tela extends JFrame {
 		
 		JLabel lblPontuacao = new JLabel("Pontuação");
 		lblPontuacao.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPontuacao.setBounds(33, 176, 102, 14);
+		lblPontuacao.setBounds(28, 126, 102, 14);
 		TabInscricao.add(lblPontuacao);
 		
 		tfPontuacao = new JTextField();
-		tfPontuacao.setBounds(185, 167, 86, 20);
+		tfPontuacao.setBounds(185, 127, 86, 20);
 		TabInscricao.add(tfPontuacao);
 		tfPontuacao.setColumns(10);
 		btnCadastrarInscricao.addActionListener(iCont);

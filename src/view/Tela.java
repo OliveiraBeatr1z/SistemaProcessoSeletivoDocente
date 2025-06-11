@@ -170,8 +170,6 @@ public class Tela extends JFrame {
 		taCursoLista.setBounds(10, 127, 599, 199);
 		TabCurso.add(taCursoLista);
 		
-		
-		
 		JLabel lblCodCurso = new JLabel("Codigo do curso");
 		lblCodCurso.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCodCurso.setBounds(28, 27, 131, 17);
@@ -200,6 +198,11 @@ public class Tela extends JFrame {
 		lblDiscilinaInscricao.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblDiscilinaInscricao.setBounds(28, 98, 113, 17);
 		TabInscricao.add(lblDiscilinaInscricao);
+
+		JLabel lblPontuacao = new JLabel("Pontuação");
+		lblPontuacao.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPontuacao.setBounds(28, 126, 102, 14);
+		TabInscricao.add(lblPontuacao);
 		
 		tfCodProcesso = new JTextField();
 		tfCodProcesso.setBounds(185, 30, 163, 20);
@@ -215,6 +218,11 @@ public class Tela extends JFrame {
 		tfDisciplinaInscricao.setBounds(185, 96, 163, 20);
 		TabInscricao.add(tfDisciplinaInscricao);
 		tfDisciplinaInscricao.setColumns(10);
+
+		tfPontuacao = new JTextField();
+		tfPontuacao.setBounds(185, 127, 86, 20);
+		TabInscricao.add(tfPontuacao);
+		tfPontuacao.setColumns(10);
 		
 		JButton btnBuscarInscricao = new JButton("Buscar");
 		btnBuscarInscricao.addActionListener(new ActionListener() {
@@ -298,20 +306,10 @@ public class Tela extends JFrame {
 		btnCadastrarProfessor.addActionListener(pCont);
 		btnBuscarProfessor.addActionListener(pCont);
 		
-		InscricaoController iCont = new InscricaoController(tfCodProcesso,  tfCpfProfessor,  tfDisciplinaInscricao, taInscricoesLista);
-		
-		JLabel lblPontuacao = new JLabel("Pontuação");
-		lblPontuacao.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPontuacao.setBounds(28, 126, 102, 14);
-		TabInscricao.add(lblPontuacao);
-		
-		tfPontuacao = new JTextField();
-		tfPontuacao.setBounds(185, 127, 86, 20);
-		TabInscricao.add(tfPontuacao);
-		tfPontuacao.setColumns(10);
+		InscricaoController iCont = new InscricaoController(tfCodProcesso,  tfCpfProfessor,  tfDisciplinaInscricao, tfPontuacao, taInscricoesLista);
 		btnCadastrarInscricao.addActionListener(iCont);
 		btnBuscarInscricao.addActionListener(iCont);
-		
+
 		DisciplinaController dCont = new DisciplinaController(tfCodDisciplina, tfNomeDisciplina, tfDiaSemanaDisciplina, tfHoraAulaDisciplina);
 		btnBuscarDisciplina.addActionListener(dCont);
 		

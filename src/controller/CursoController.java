@@ -40,7 +40,7 @@ public class CursoController implements ActionListener {
 
 	private void buscar() {
 		Curso curso = new Curso();
-		curso.setCodCurso(tfCodCurso.getText());
+		curso.setCodigoCurso(tfCodCurso.getText());
 		
 		System.out.println(curso);
 		
@@ -48,7 +48,7 @@ public class CursoController implements ActionListener {
 
 	private void cadastro() {
 		Curso curso = new Curso();
-		curso.setCodCurso(tfCodCurso.getText());
+		curso.setCodigoCurso(tfCodCurso.getText());
 		curso.setNomeCurso(tfNomeCurso.getText());
 		curso.setAreaConhecimentoCurso(tfAreaConhecimentoCurso.getText());
 		

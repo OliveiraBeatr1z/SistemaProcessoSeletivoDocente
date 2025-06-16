@@ -67,10 +67,10 @@ public class ProfessorController implements ActionListener {
 			taProfessoresLista.setText("CPF: " + professor.getCpf() + " - Nome: " + professor.getNome() + " - Area de conhecimento: " + professor.getAreaConhecimento());
 		} else {
 			taProfessoresLista.setText("Professor não encontrado.");
+			tfCpf.setText("");
+			tfNomeProfessor.setText("");
+			tfAreaConhecimentoProfessor.setText("");
 		}
 		
-		tfCpf.setText("");
-		tfNomeProfessor.setText("");
-		tfAreaConhecimentoProfessor.setText("");
 	}
 }

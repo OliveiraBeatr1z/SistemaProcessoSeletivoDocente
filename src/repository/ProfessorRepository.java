@@ -11,10 +11,10 @@ import java.io.PrintWriter;
 import model.Professor;
 
 public class ProfessorRepository {
-	private final String path = System.getProperty("user.home") + File.separator + "Sistema PSD";
+	private final String path = System.getProperty("user.home") + File.separator + "SistemaPSD";
 	private final String  arquivo = "professor.csv";
 	
-	public void salvar(Professor professor) throws IOException {
+	public void salvarProfessor(Professor professor) throws IOException {
 		File dir = new File(path);
 		if(!dir.exists()) dir.mkdir();
 		
@@ -23,10 +23,9 @@ public class ProfessorRepository {
 		
 		try(FileWriter fw = new FileWriter(arq, existe);
 			PrintWriter pw = new PrintWriter(fw)){
-			pw.write(professor.getCpf() +";"+  professor.getNome() +"; "+ professor.getAreaConhecimento() + "\r\n");
+			pw.write(professor.toString() + "\r\n");
 		}
 	}
-	// teste
 	
 	public Professor buscaPorCpf(String cpf) throws IOException {
 		File arq = new File(path,arquivo);

@@ -1,58 +1,95 @@
 package model;
 
+
 public class Disciplina {
-	private String codDisciplina;
+
+	private String codigoDisciplina;
 	private String nomeDisciplina;
 	private String diaSemana;
-	private String horarioInicio;
+	private String horarioAula;
 	private String horasDiarias;
+	private Curso codigoCurso;
 	
-	@Override
-	public String toString() {
-		return "Disciplina [codDisciplina=" + codDisciplina + ", nomeDisciplina=" + nomeDisciplina + ", diaSemana="
-				+ diaSemana + ", horarioInicio=" + horarioInicio + ", horasDiarias=" + horasDiarias + "]";
+	
+
+	public String getCodigoDisciplina() {
+		return codigoDisciplina;
 	}
 
-	public String getCodDisciplina() {
-		return codDisciplina;
+
+
+	public void setCodigoDisciplina(String codigoDisciplina) {
+		this.codigoDisciplina = codigoDisciplina;
 	}
 
-	public void setCodDisciplina(String codDisciplina) {
-		this.codDisciplina = codDisciplina;
-	}
+
 
 	public String getNomeDisciplina() {
 		return nomeDisciplina;
 	}
 
+
+
 	public void setNomeDisciplina(String nomeDisciplina) {
 		this.nomeDisciplina = nomeDisciplina;
 	}
+
+
 
 	public String getDiaSemana() {
 		return diaSemana;
 	}
 
+
+
 	public void setDiaSemana(String diaSemana) {
 		this.diaSemana = diaSemana;
 	}
 
-	public String getHorarioInicio() {
-		return horarioInicio;
+
+
+	public String getHorarioAula() {
+		return horarioAula;
 	}
 
-	public void setHorarioInicio(String horarioInicio) {
-		this.horarioInicio = horarioInicio;
+
+
+	public void setHorarioAula(String horarioAula) {
+		this.horarioAula = horarioAula;
 	}
+
+
 
 	public String getHorasDiarias() {
 		return horasDiarias;
 	}
 
+
+
 	public void setHorasDiarias(String horasDiarias) {
 		this.horasDiarias = horasDiarias;
 	}
 
+
+
+	public Curso getCodigoCurso() {
+		return codigoCurso;
+	}
+
+
+
+	public void setCodigoCurso(Curso codigoCurso) {
+		this.codigoCurso = codigoCurso;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return codigoDisciplina + ";" + nomeDisciplina
+				+ ";" + diaSemana + ";" + horarioAula + ";" + horasDiarias
+				+ ";" + codigoCurso;
+	}
 	
 	
 }

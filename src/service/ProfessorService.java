@@ -2,8 +2,6 @@ package service;
 
 import java.io.IOException;
 
-import javax.swing.JTextField;
-
 import model.Professor;
 import repository.ProfessorRepository;
 
@@ -15,7 +13,7 @@ public class ProfessorService {
 	}
 	
 	public void cadastrarProfessor(Professor professor) throws IOException{
-		repository.salvar(professor);
+		repository.salvarProfessor(professor);
 	}
 	
 	public Professor buscarPorCpf(String string) throws IOException{

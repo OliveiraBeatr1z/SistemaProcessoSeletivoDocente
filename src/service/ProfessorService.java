@@ -19,4 +19,13 @@ public class ProfessorService {
 	public Professor buscarPorCpf(String string) throws IOException{
 		return repository.buscaPorCpf(string);
 	}
+	
+	public void atualizarProfessor(Professor professor) throws IOException {
+	    repository.salvarProfessor(professor); 
+	}
+
+	public void removerProfessor(String cpf) throws Exception {
+	    repository.removerProfessor(cpf);
+	}
+
 }

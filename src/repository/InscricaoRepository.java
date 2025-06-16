@@ -88,8 +88,8 @@ public class InscricaoRepository {
                 while ((linha = br.readLine()) != null) {
                     String[] dados = linha.split(";");
                     if (dados.length == 4) {
-                        // Verifica se essa inscrição NÃO é a que queremos remover
-                        if (!dados[0].equals(codProcesso) || !dados[1].equals(cpfProfessor)) {
+                        // Faz comparações limpando espaços extras
+                        if (!dados[0].trim().equals(codProcesso.trim()) || !dados[1].trim().equals(cpfProfessor.trim())) {
                             Inscricao i = new Inscricao();
                             i.setCodProcesso(dados[0].trim());
                             i.setCpfProfessor(dados[1].trim());
@@ -111,7 +111,44 @@ public class InscricaoRepository {
             }
         }
     }
+    
+    public void atualizarInscricao(String codProcesso, String cpfProfessor, String novaDisciplina, String novaPontuacao) throws Exception {
+        File arq = new File(path, arquivo);
+        Lista<Inscricao> inscricoesAtualizadas = new Lista<>();
+
+        if (arq.exists() && arq.isFile()) {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(arq)))) {
+                String linha;
+                while ((linha = br.readLine()) != null) {
+                    String[] dados = linha.split(";");
+                    if (dados.length == 4) {
+                        Inscricao i = new Inscricao();
+                        i.setCodProcesso(dados[0].trim());
+                        i.setCpfProfessor(dados[1].trim());
+
+                        if (dados[0].equals(codProcesso) && dados[1].equals(cpfProfessor)) {
+                            i.setCodigoDisciplina(novaDisciplina);
+                            i.setPontuacao(novaPontuacao);
+                        } else {
+                            i.setCodigoDisciplina(dados[2].trim());
+                            i.setPontuacao(dados[3].trim());
+                        }
+
+                        inscricoesAtualizadas.addLast(i);
+                    }
+                }
+            }
+
+            try (FileWriter fw = new FileWriter(arq, false);
+                 PrintWriter pw = new PrintWriter(fw)) {
+                for (int i = 0; i < inscricoesAtualizadas.size(); i++) {
+                    pw.write(inscricoesAtualizadas.get(i).toString() + "\r\n");
+                }
+            }
+        }
+    }
 
 
+  }
 
-}
+

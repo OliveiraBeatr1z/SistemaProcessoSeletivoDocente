@@ -35,10 +35,21 @@ public class ProfessorController implements ActionListener {
 	                cadastrar();
 	            } else if (cmd.equals("Buscar")) {
 	                buscar();
+	            } else if (cmd.equals("Atualizar")) {
+	            	atualizar();
+	            } else if (cmd.equals("Deletar")) {
+	            	try {
+						deletar();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 	            }
 	        } catch (IOException ex) {
 	            taProfessoresLista.setText("Erro: " + ex.getMessage());
 	        }
+		 
+		 
 	}
 
 	private void cadastrar() throws IOException {
@@ -73,4 +84,31 @@ public class ProfessorController implements ActionListener {
 		}
 		
 	}
+	
+	 private void atualizar() throws IOException {
+	        Professor professor = new Professor();
+	        professor.setCpf(tfCpf.getText());
+	        professor.setNome(tfNomeProfessor.getText());
+	        professor.setAreaConhecimento(tfAreaConhecimentoProfessor.getText());
+
+	        ProfessorService service = new ProfessorService();
+	        service.atualizarProfessor(professor); // salva com o mesmo CPF sobrescreve a linha
+
+	        taProfessoresLista.setText("Professor atualizado com sucesso.");
+	        tfCpf.setText("");
+			tfNomeProfessor.setText("");
+			tfAreaConhecimentoProfessor.setText("");
+	    }
+
+	    private void deletar() throws IOException, Exception {
+	        String cpf = tfCpf.getText();
+	        ProfessorService service = new ProfessorService();
+	        service.removerProfessor(cpf);
+
+	        taProfessoresLista.setText("Professor deletado com sucesso.");
+	        tfCpf.setText("");
+			tfNomeProfessor.setText("");
+			tfAreaConhecimentoProfessor.setText("");
+	    }
+	
 }

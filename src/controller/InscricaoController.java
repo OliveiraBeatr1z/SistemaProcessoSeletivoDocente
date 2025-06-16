@@ -36,6 +36,7 @@ public class InscricaoController implements ActionListener  {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand(); 
+		
 		if(cmd.equals("Cadastrar")) {
 			try {
 				cadastro();
@@ -47,7 +48,6 @@ public class InscricaoController implements ActionListener  {
 				try {
 					buscar();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 		}
@@ -56,11 +56,10 @@ public class InscricaoController implements ActionListener  {
 		    atualizar();
 		}
 
-		if (cmd.equals("Remover")) {
+		if (cmd.equals("Deletar")) {
 		     try {
 				deletar();
 			 } catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			 }
 		}
@@ -113,11 +112,6 @@ public class InscricaoController implements ActionListener  {
 	    tfPontuacao.setText("");
 	}
 	
-	private void atualizar() {
-		// TODO Auto-generated method stub
-		
-	}
-	
 	private void deletar() throws Exception {
 	    String codProcesso = tfCodProcesso.getText();
 	    String cpf = tfCpfProfessor.getText();
@@ -153,6 +147,36 @@ public class InscricaoController implements ActionListener  {
 	    tfcodigoDisciplina.setText("");
 	    tfPontuacao.setText("");
 	}
+	
+	private void atualizar() {
+	    try {
+	        String codProcesso = tfCodProcesso.getText().trim();
+	        String cpf = tfCpfProfessor.getText().trim();
+	        String novaDisciplina = tfcodigoDisciplina.getText().trim();
+	        String novaPontuacao = tfPontuacao.getText().trim();
+
+	        if (codProcesso.equals("") || cpf.equals("")) {
+	            JOptionPane.showMessageDialog(null, "Informe o código do processo e o CPF do professor para atualizar.", "Erro", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+
+	        InscricaoService service = new InscricaoService();
+	        service.atualizarInscricao(codProcesso, cpf, novaDisciplina, novaPontuacao);
+
+	        JOptionPane.showMessageDialog(null, "Inscrição atualizada com sucesso!");
+
+	        tfCodProcesso.setText("");
+	        tfCpfProfessor.setText("");
+	        tfcodigoDisciplina.setText("");
+	        tfPontuacao.setText("");
+	        taInscricaoLista.setText("");
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        JOptionPane.showMessageDialog(null, "Erro ao atualizar inscrição: " + e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+	    }
+	}
+
 
 
 

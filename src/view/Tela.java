@@ -199,7 +199,7 @@ public class Tela extends JFrame {
 		TabCurso.add(tfAreaConhecimentoCurso);
 		tfAreaConhecimentoCurso.setColumns(10);
 		
-		JButton btnBuscarCurso = new JButton("Bucar");
+		JButton btnBuscarCurso = new JButton("Buscar");
 		btnBuscarCurso.setBackground(new Color(255, 255, 255));
 		btnBuscarCurso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -262,6 +262,11 @@ public class Tela extends JFrame {
 		lblDiscilinaInscricao.setBounds(31, 96, 113, 17);
 		TabInscricao.add(lblDiscilinaInscricao);
 		
+		JLabel lblPontuacao = new JLabel("Pontuação");
+		lblPontuacao.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPontuacao.setBounds(60, 128, 81, 14);
+		TabInscricao.add(lblPontuacao);
+		
 		tfCodProcesso = new JTextField();
 		tfCodProcesso.setBounds(151, 30, 163, 20);
 		TabInscricao.add(tfCodProcesso);
@@ -276,11 +281,6 @@ public class Tela extends JFrame {
 		tfDisciplinaInscricao.setBounds(151, 93, 163, 20);
 		TabInscricao.add(tfDisciplinaInscricao);
 		tfDisciplinaInscricao.setColumns(10);
-		
-		JLabel lblPontuacao = new JLabel("Pontuação");
-		lblPontuacao.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPontuacao.setBounds(60, 128, 81, 14);
-		TabInscricao.add(lblPontuacao);
 		
 		tfPontuacao = new JTextField();
 		tfPontuacao.setBounds(151, 124, 86, 20);
@@ -384,6 +384,8 @@ public class Tela extends JFrame {
 				ProfessorController pCont = new ProfessorController(tfCpfProfessor, tfNomeProfessor, tfAreaConhecimentoProfessor, taProfessoresLista );
 		btnCadastrarProfessor.addActionListener(pCont);
 		btnBuscarProfessor.addActionListener(pCont);
+		btnAtualizarProfessor.addActionListener(pCont);
+		btnDeletarProfessor.addActionListener(pCont);
 		
 
 		//inicialização DisciplinaController e ação dos respectivos botões da tela disciplina

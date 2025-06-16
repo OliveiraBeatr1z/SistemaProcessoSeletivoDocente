@@ -52,6 +52,12 @@ public class InscricaoService {
 		    }
 
 		}
-
+	 
+	 public void atualizarInscricao(String codProcesso, String cpf, String novaDisciplina, String novaPontuacao) throws Exception {
+		    InscricaoRepository repo = new InscricaoRepository();
+		    repo.atualizarInscricao(codProcesso, cpf, novaDisciplina, novaPontuacao);
+	 }
+	 
+	 
  
 }

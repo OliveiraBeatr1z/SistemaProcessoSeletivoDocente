@@ -388,12 +388,12 @@ public class Tela extends JFrame {
 		btnDeletarProfessor.addActionListener(pCont);
 		
 
-		//inicialização DisciplinaController e ação dos respectivos botões da tela disciplina
-//		DisciplinaController dCont = new DisciplinaController(tfCodDisciplina, tfNomeDisciplina, tfDiaSemanaDisciplina, tfHoraAulaDisciplina);
-//		btnCadastrarDisciplina.addActionListener(dCont);
-//		btnBuscarDisciplina.addActionListener(dCont);
-//		btnAtualizarDisciplina.addActionListener(dCont);
-//		btnRemoverDisciplina.addActionListener(dCont);
+//		inicialização DisciplinaController e ação dos respectivos botões da tela disciplina
+		DisciplinaController dCont = new DisciplinaController(tfCodDisciplina, tfNomeDisciplina, tfDiaSemanaDisciplina, tfHoraAulaDisciplina, tfHorasDiariasDisciplina, taDisciplinasLista);
+		btnCadastrarDisciplina.addActionListener(dCont);
+		btnBuscarDisciplina.addActionListener(dCont);
+		btnAtualizarDisciplina.addActionListener(dCont);
+		btnRemoverDisciplina.addActionListener(dCont);
 		
 		//inicialização CursoController e ação dos respectivos botões da tela curso
 		CursoController cCont = new CursoController(tfCodigoCurso, tfNomeCurso, tfAreaConhecimentoCurso, taCursoLista);

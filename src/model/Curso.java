@@ -1,50 +1,38 @@
 package model;
 
 public class Curso {
+    private String codigoCurso;
+    private String nomeCurso;
+    private String areaConhecimentoCurso;
 
-	private String codigoCurso;
-	private String nomeCurso;
-	private String areaConhecimentoCurso;
-	
-	public Curso() {
-		
-	}
+    // Getters e Setters
+    public String getCodigoCurso() {
+        return codigoCurso;
+    }
 
-	public Curso(String codigoCurso, String nomeCurso, String areaConhecimentoCurso) {
-		super();
-		this.codigoCurso = codigoCurso;
-		this.nomeCurso = nomeCurso;
-		this.areaConhecimentoCurso = areaConhecimentoCurso;
-	}
+    public void setCodigoCurso(String codigoCurso) {
+        this.codigoCurso = codigoCurso;
+    }
 
-	public String getCodigoCurso() {
-		return codigoCurso;
-	}
+    public String getNomeCurso() {
+        return nomeCurso;
+    }
 
-	public void setCodigoCurso(String string) {
-		this.codigoCurso = string;
-	}
+    public void setNomeCurso(String nomeCurso) {
+        this.nomeCurso = nomeCurso;
+    }
 
-	public String getNomeCurso() {
-		return nomeCurso;
-	}
+    public String getAreaConhecimentoCurso() {
+        return areaConhecimentoCurso;
+    }
 
-	public void setNomeCurso(String nomeCurso) {
-		this.nomeCurso = nomeCurso;
-	}
+    public void setAreaConhecimentoCurso(String areaConhecimentoCurso) {
+        this.areaConhecimentoCurso = areaConhecimentoCurso;
+    }
 
-	public String getAreaConhecimentoCurso() {
-		return areaConhecimentoCurso;
-	}
-
-	public void setAreaConhecimentoCurso(String areaConhecimentoCurso) {
-		this.areaConhecimentoCurso = areaConhecimentoCurso;
-	}
-
-	@Override
-	public String toString() {
-		return codigoCurso + ";" + nomeCurso + ";" + areaConhecimentoCurso;
-	}
-	
-	
+    // toString para salvar no CSV
+    @Override
+    public String toString() {
+        return codigoCurso + ";" + nomeCurso + ";" + areaConhecimentoCurso;
+    }
 }

@@ -34,5 +34,14 @@ public class CursoService {
 		}
 		return new Lista<>();
 	}
+	
+	public void atualizarCurso(Curso curso) throws IOException {
+	    repository.atualizarCurso(curso);
+	}
+
+	public void removerCurso(String codigoCurso) throws IOException {
+	    repository.removerCurso(codigoCurso);
+	}
+
 
 }

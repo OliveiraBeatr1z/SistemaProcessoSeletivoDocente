@@ -109,13 +109,34 @@ public class CursoController implements ActionListener {
 		tfAreaConhecimentoCurso.setText("");
 	}
 	
-	private void atualizar() {
-		// TODO Auto-generated method stub
-		
+	private void atualizar() throws IOException {
+	    Curso curso = new Curso();
+	    curso.setCodigoCurso(tfCodCurso.getText());
+	    curso.setNomeCurso(tfNomeCurso.getText());
+	    curso.setAreaConhecimentoCurso(tfAreaConhecimentoCurso.getText());
+
+	    CursoService cursoService = new CursoService();
+	    cursoService.atualizarCurso(curso);
+
+	    tfCodCurso.setText("");
+	    tfNomeCurso.setText("");
+	    tfAreaConhecimentoCurso.setText("");
+	    taCursoLista.setText("Curso atualizado com sucesso!");
 	}
-	
-	private void remover() {
-		// TODO Auto-generated method stub
-		
+
+	private void remover() throws IOException {
+	    String codigo = tfCodCurso.getText();
+	    if (!codigo.isBlank()) {
+	        CursoService cursoService = new CursoService();
+	        cursoService.removerCurso(codigo);
+
+	        tfCodCurso.setText("");
+	        tfNomeCurso.setText("");
+	        tfAreaConhecimentoCurso.setText("");
+	        taCursoLista.setText("Curso removido com sucesso!");
+	    } else {
+	        taCursoLista.setText("Informe o código do curso para remover.");
+	    }
 	}
+
 }	

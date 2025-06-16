@@ -37,7 +37,7 @@ public class CursoRepository {
 	                String linha;
 	                while ((linha = br.readLine()) != null) {
 	                    String[] dados = linha.split(";");
-	                    if (dados.length >= 4 && dados[0].equals(codigoCurso)) {
+	                    if (dados.length >= 3 && dados[0].equals(codigoCurso)) {
 	                        Curso c = new Curso();
 	                        c.setCodigoCurso(dados[0]);
 	                        c.setNomeCurso(dados[1]);
@@ -59,7 +59,7 @@ public class CursoRepository {
                 String linha;
                 while ((linha = br.readLine()) != null) {
                     String[] dados = linha.split(";");
-                    if (dados.length >= 4 && dados[1].equals(nomeCurso)) {
+                    if (dados.length >= 3 && dados[1].equals(nomeCurso)) {
                         Curso c = new Curso();
                         c.setCodigoCurso(dados[0]);
                         c.setNomeCurso(dados[1]);
@@ -93,6 +93,57 @@ public class CursoRepository {
         }
         return cursos;
 	}
+	
+	public void atualizarCurso(Curso curso) throws IOException {
+	    File arq = new File(path, arquivo);
+	    File temp = new File(path, "temp_curso.csv");
+
+	    try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(arq)));
+	         PrintWriter pw = new PrintWriter(new FileWriter(temp))) {
+
+	        String linha;
+	        boolean atualizado = false;
+
+	        while ((linha = br.readLine()) != null) {
+	            String[] dados = linha.split(";");
+	            if (dados.length >= 3 && dados[0].equals(curso.getCodigoCurso())) {
+	                pw.println(curso.toString()); // atualiza
+	                atualizado = true;
+	            } else {
+	                pw.println(linha); // mantém
+	            }
+	        }
+
+	        if (!atualizado) {
+	            pw.println(curso.toString()); // se não encontrou, adiciona
+	        }
+	    }
+
+	    arq.delete();
+	    temp.renameTo(arq);
+	}
+
+	public void removerCurso(String codigoCurso) throws IOException {
+	    File arq = new File(path, arquivo);
+	    File temp = new File(path, "temp_curso.csv");
+
+	    try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(arq)));
+	         PrintWriter pw = new PrintWriter(new FileWriter(temp))) {
+
+	        String linha;
+
+	        while ((linha = br.readLine()) != null) {
+	            String[] dados = linha.split(";");
+	            if (!dados[0].equals(codigoCurso)) {
+	                pw.println(linha); // mantém os diferentes
+	            }
+	        }
+	    }
+
+	    arq.delete();
+	    temp.renameTo(arq);
+	}
+
 	
 	
 }

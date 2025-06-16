@@ -43,8 +43,7 @@ public class Curso {
 
 	@Override
 	public String toString() {
-		return codigoCurso + ";" + nomeCurso + ";"
-				+ areaConhecimentoCurso;
+		return codigoCurso + ";" + nomeCurso + ";" + areaConhecimentoCurso;
 	}
 	
 	

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -43,13 +44,27 @@ public class InscricaoController implements ActionListener  {
 			}
 		}
 		if(cmd.equals("Buscar")) {
-			try {
-				buscar();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+				try {
+					buscar();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		}
 		
+		if (cmd.equals("Atualizar")) {
+		    atualizar();
+		}
+
+		if (cmd.equals("Remover")) {
+		     try {
+				deletar();
+			 } catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			 }
+		}
+
 	}
 
 	private void cadastro() throws IOException {
@@ -58,8 +73,6 @@ public class InscricaoController implements ActionListener  {
 		inscricao.setCpfProfessor(tfCpfProfessor.getText());
 		inscricao.setCodigoDisciplina(tfcodigoDisciplina.getText());
 		inscricao.setPontuacao(tfPontuacao.getText());
-		
-		System.out.println(inscricao);
 		
 		InscricaoService inscricaoService = new InscricaoService();
 		inscricaoService.cadastraInscricao(inscricao);
@@ -71,16 +84,27 @@ public class InscricaoController implements ActionListener  {
 		tfPontuacao.setText("");
 	}
 		
-	private void buscar() throws IOException {
-	    Inscricao inscricao = new Inscricao();
-	    inscricao.setCodProcesso(tfCodProcesso.getText());
-	    inscricao.setCpfProfessor(tfCpfProfessor.getText());
+	private void buscar() throws Exception {
+	    Inscricao filtro = new Inscricao();
+	    filtro.setCodProcesso(tfCodProcesso.getText().trim());
+	    filtro.setCpfProfessor(tfCpfProfessor.getText().trim());
 
-	    InscricaoService service = new InscricaoService(); 
-	    try {
-	        service.buscaInscricao(inscricao, taInscricaoLista);
-	    } catch (Exception e) {
-	        e.printStackTrace();
+	    InscricaoService inscricaoService = new InscricaoService();
+	    Lista<Inscricao> inscricoes = inscricaoService.buscarInscricoes(filtro);
+
+	    if (inscricoes != null && inscricoes.size() > 0) {
+	        StringBuilder builder = new StringBuilder();
+	        for (int j = 0; j < inscricoes.size(); j++) {
+	            Inscricao i = inscricoes.get(j);
+	            builder.append("Processo: ").append(i.getCodProcesso())
+	              .append(" - CPF: ").append(i.getCpfProfessor())
+	              .append(" - Disciplina: ").append(i.getCodigoDisciplina())
+	              .append(" - Pontuação: ").append(i.getPontuacao())
+	              .append("\n");
+	        }
+	        taInscricaoLista.setText(builder.toString());
+	    } else {
+	        taInscricaoLista.setText("Nenhuma inscrição encontrada.");
 	    }
 
 	    tfCodProcesso.setText("");
@@ -88,4 +112,49 @@ public class InscricaoController implements ActionListener  {
 	    tfcodigoDisciplina.setText("");
 	    tfPontuacao.setText("");
 	}
+	
+	private void atualizar() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void deletar() throws Exception {
+	    String codProcesso = tfCodProcesso.getText();
+	    String cpf = tfCpfProfessor.getText();
+
+	    if (codProcesso.equals("") || cpf.equals("")) {
+	        JOptionPane.showMessageDialog(null, "Informe o código do processo e o CPF para remover.", "Erro", JOptionPane.ERROR_MESSAGE);
+	       
+	    }
+
+	    InscricaoService service = new InscricaoService();
+	    service.removerInscricao(codProcesso, cpf); // remove do arquivo
+
+	    // Criar o filtro para buscar novamente as inscrições restantes
+	    Inscricao filtro = new Inscricao();
+	    filtro.setCodProcesso(codProcesso); // usa o processo como filtro
+
+	    Lista<Inscricao> atualizadas = service.buscarInscricoes(filtro); // usa o seu método atual
+
+	    StringBuffer buffer = new StringBuffer();
+	    for (int i = 0; i < atualizadas.size(); i++) {
+	        Inscricao iTemp = atualizadas.get(i);
+	        buffer.append("Processo: " + iTemp.getCodProcesso() +
+	                      " - CPF: " + iTemp.getCpfProfessor() +
+	                      " - Disciplina: " + iTemp.getCodigoDisciplina() +
+	                      " - Pontuação: " + iTemp.getPontuacao() + "\n");
+	    }
+
+	    taInscricaoLista.setText(buffer.toString());
+
+	    // limpa os campos
+	    tfCodProcesso.setText("");
+	    tfCpfProfessor.setText("");
+	    tfcodigoDisciplina.setText("");
+	    tfPontuacao.setText("");
+	}
+
+
+
+
 }

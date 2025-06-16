@@ -2,11 +2,14 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import br.com.beatrizoliveiralistagenerica.Lista;
 import model.Curso;
+import service.CursoService;
 
 public class CursoController implements ActionListener {
 	
@@ -15,7 +18,7 @@ public class CursoController implements ActionListener {
 	private JTextField tfAreaConhecimentoCurso;
 	private JTextArea taCursoLista;
 	
-	// quando clicar no botão, todos esses elementos serao passados para essa classe. 
+
 	public CursoController(JTextField tfCodCurso, JTextField tfNomeCurso, JTextField tfAreaConhecimentoCurso,
 			JTextArea taCursoLista) {
 		super();
@@ -25,28 +28,43 @@ public class CursoController implements ActionListener {
 		this.taCursoLista = taCursoLista;
 	}
 	
-	// essa classe ouve o click do botão e aciona esse método.
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String cmd = e.getActionCommand(); // pega o texto que foi colocado no tf . 
+		String cmd = e.getActionCommand(); 
 		if(cmd.equals("Cadastrar")) {
-			cadastro();
+			try {
+				cadastro();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
 		if(cmd.equals("Buscar")) {
-			buscar();
+			try {
+				buscar();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		if(cmd.equals("Atualizar")) {
+			try {
+				atualizar();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		if(cmd.equals("Remover")) {
+			try {
+				remover();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
 
-	private void buscar() {
-		Curso curso = new Curso();
-		curso.setCodigoCurso(tfCodCurso.getText());
-		
-		System.out.println(curso);
-		
-	}
-
-	private void cadastro() {
+	private void cadastro() throws IOException {
 		Curso curso = new Curso();
 		curso.setCodigoCurso(tfCodCurso.getText());
 		curso.setNomeCurso(tfNomeCurso.getText());
@@ -54,8 +72,50 @@ public class CursoController implements ActionListener {
 		
 		System.out.println(curso);
 		
+		CursoService cursoService = new CursoService();
+		cursoService.cadastrarCurso(curso);
+		
+		tfCodCurso.setText("");
+		tfNomeCurso.setText("");
+		tfAreaConhecimentoCurso.setText("");
+		
 	}
 	
+	private void buscar() throws Exception {
+		Curso curso = new Curso();
+		curso.setCodigoCurso(tfCodCurso.getText());
+		curso.setNomeCurso(tfNomeCurso.getText());
+		
+		CursoService cursoService = new CursoService();
+		Lista<Curso> cursos = cursoService.buscarCursos(curso);
+		
+		if(cursos != null && cursos.size() > 0) {
+			StringBuilder builder = new StringBuilder();
+			for (int i = 0; i < cursos.size(); i++) {
+	            Curso c = cursos.get(i);
+	            builder.append("Código curso: ").append(c.getCodigoCurso())
+	              .append(" - Nome: ").append(c.getNomeCurso())
+	              .append(" - Area de Conhecimento: ").append(c.getAreaConhecimentoCurso())
+	              .append("\n");
+	            System.out.println(cursos);
+	        }
+			taCursoLista.setText(builder.toString());
+	    } else {
+	        taCursoLista.setText("Nenhum curso encontrado.");
+		}
+		
+		tfCodCurso.setText("");
+		tfNomeCurso.setText("");
+		tfAreaConhecimentoCurso.setText("");
+	}
 	
+	private void atualizar() {
+		// TODO Auto-generated method stub
+		
+	}
 	
+	private void remover() {
+		// TODO Auto-generated method stub
+		
+	}
 }	

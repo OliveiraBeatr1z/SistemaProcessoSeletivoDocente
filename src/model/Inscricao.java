@@ -8,9 +8,8 @@ public class Inscricao {
     
 	@Override
 	public String toString() {
-		return codProcesso + ";" + cpfProfessor + ";" + codigoDisciplina + ";" + pontuacao;
-		
-	}
+		   return codProcesso + ";" + cpfProfessor + ";" + codigoDisciplina + ";" + pontuacao;
+		}
 
 	public String getCodProcesso() {
 		return codProcesso;

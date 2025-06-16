@@ -3,15 +3,12 @@ package repository;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-
 import br.com.beatrizoliveiralistagenerica.Lista;
 import model.Inscricao;
-import model.Professor;
 
 public class InscricaoRepository {
     private final String path = System.getProperty("user.home") + File.separator + "SistemaPSD";
@@ -30,53 +27,53 @@ public class InscricaoRepository {
 		}
 	}
 
-    public Inscricao buscarProcesso(String codProcesso) throws IOException {
+    public Lista<Inscricao> buscarProcesso(String codProcesso) throws IOException {
         File arq = new File(path,arquivo);
         Inscricao inscricao = new Inscricao();
+        Lista<Inscricao> inscricoes = new Lista<>();
 
 		if(arq.exists() && arq.isFile()) {
 			try(BufferedReader br = new BufferedReader (new InputStreamReader (new FileInputStream(arq)))) {
 				String linha;
 				while ((linha = br.readLine()) != null) {
-					String[] dados = linha.split(";");
-					if(dados[0].equals(codProcesso)) {
-						inscricao.setCodProcesso(dados[0]);
-						inscricao.setCpfProfessor(dados[1]);
-						inscricao.setCodigoDisciplina(dados[2]);
-                        inscricao.setPontuacao(dados[3]);
-						return inscricao;
-					} else{
-                        inscricao = null;
-                    }
+					String[] vetLinha = linha.split(";");
+					if(vetLinha[0].equals(codProcesso)) {
+						inscricao.setCodProcesso(vetLinha[0]);
+						inscricao.setCpfProfessor(vetLinha[1]);
+						inscricao.setCodigoDisciplina(vetLinha[2]);
+                        inscricao.setPontuacao(vetLinha[3]);
+                        
+                        inscricoes.addFirst(inscricao);
+					}
+					 linha = br.readLine();
 				}
 			}
-					
+			return inscricoes;
 		}
 		return null;
     }
 
-    public Inscricao buscarProfessor(String cpfProfessor) throws IOException {
+    public Lista<Inscricao> buscarProfessor(String cpfProfessor) throws IOException {
         File arq = new File(path,arquivo);
         Inscricao inscricao = new Inscricao();
-        Lista listaInscricao = new Lista();
+        Lista<Inscricao> inscricoes = new Lista<>();
 		if(arq.exists() && arq.isFile()) {
 			try(BufferedReader br = new BufferedReader (new InputStreamReader (new FileInputStream(arq)))) {
 				String linha;
 				while ((linha = br.readLine()) != null) {
-					String[] dados = linha.split(";");
-					if(dados[1].equals(cpfProfessor)) {
-						inscricao.setCodProcesso(dados[0]);
-						inscricao.setCpfProfessor(dados[1]);
-						inscricao.setCodigoDisciplina(dados[2]);
-                        inscricao.setPontuacao(dados[3]);
+					String[] vetLinha = linha.split(";");
+					if(vetLinha[1].equals(cpfProfessor)) {
+						inscricao.setCodProcesso(vetLinha[0]);
+						inscricao.setCpfProfessor(vetLinha[1]);
+						inscricao.setCodigoDisciplina(vetLinha[2]);
+                        inscricao.setPontuacao(vetLinha[3]);
 
-                        listaInscricao.addFirst(inscricao);
+                        inscricoes.addFirst(inscricao);
 					}
                     linha = br.readLine();
 				}
-                return inscricao;
+				return inscricoes;
 			}
-					
 		}
 		return null;
     }

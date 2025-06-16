@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import br.com.beatrizoliveiralistagenerica.Lista;
 import model.Inscricao;
 import service.InscricaoService;
 
@@ -71,26 +72,20 @@ public class InscricaoController implements ActionListener  {
 	}
 		
 	private void buscar() throws IOException {
-		Inscricao inscricao = new Inscricao();
-		InscricaoService service = new InscricaoService(); 
-		
-		inscricao = service.buscaInscricao(tfCodProcesso.getText());  
+	    Inscricao inscricao = new Inscricao();
+	    inscricao.setCodProcesso(tfCodProcesso.getText());
+	    inscricao.setCpfProfessor(tfCpfProfessor.getText());
 
-		if(inscricao != null) {
-			taInscricaoLista.setText("Processo: " + inscricao.getCodProcesso() + " - CPF do Candidato: " + inscricao.getCpfProfessor() + " - Disciplina: " + inscricao.getCodigoDisciplina() + " - Pontuação: " + inscricao.getPontuacao());
-		} else {
-			taInscricaoLista.setText("Inscrição não encontrada.");
-		}
-		
-		tfCodProcesso.setText("");
-		tfCpfProfessor.setText("");
-		tfcodigoDisciplina.setText("");
-		taInscricaoLista.setText("");
-		tfPontuacao.setText("");
+	    InscricaoService service = new InscricaoService(); 
+	    try {
+	        service.buscaInscricao(inscricao, taInscricaoLista);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 
-	} 
-	
-
-
-
+	    tfCodProcesso.setText("");
+	    tfCpfProfessor.setText("");
+	    tfcodigoDisciplina.setText("");
+	    tfPontuacao.setText("");
+	}
 }
